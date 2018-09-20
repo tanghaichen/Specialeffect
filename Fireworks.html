@@ -5,7 +5,7 @@
 <meta
 	content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
 	name="viewport">
-<title>forever love</title>
+<title>^▽^苏苏小姐姐~</title>
 </head>
 <script src="js/jquery.min.js" type="text/javascript"></script>
 <script src="js/jquery.fireworks.js" type="text/javascript"></script>
@@ -24,7 +24,7 @@ html {
 body {
 	max-width: 600px;
 	margin: 0 auto;
-	background: #f0f0f0;
+	background: #333;
 	color: #000;
 }
 .masthead{
@@ -46,7 +46,9 @@ background:#333;
 	display: -webkit-box;
 	display: flex;
 }
-
+.text{
+color:red;
+}
 .text_wrapper .text {
 	padding-top: 20px;
 	padding-left: 20px;
@@ -316,9 +318,9 @@ transform-origin
 
 		});
 	}
-	var myWords = '有人说，人的一生会遇到2920万人，而两个人相爱的概率只有0.000049。在这茫茫人海中，两个人能相遇就值得感激，能相爱更是一种难得。所以，我很庆幸上天让我遇见了你。我希望有个如你一般的人，能看完我写过的所有状态，读完我所有的日志，看完我从小到大的照片，试着听我喜欢的歌。如果可以，甚至陪我去我喜欢的地方，只想弥补错过你的青春。';
+	var myWords = '我想有一间小木屋,仿佛是童话里的一朵鲜蘑菇,依附着百年老树。<br/> 幻想撑着一把小伞,在寒流仲夏的小雨中渐行渐远,也不懂悲欢  假如人间的善恶爱憎无法分明  我宁愿漂浮在永恒冷寂的太空。。';
 	var x = 0;
-	var speed = 150;
+	var speed = 250;
 	var current = 0;
 	function typeWrite() {
 		$('.type_words').html(myWords.substring(0, x++) + '_');
@@ -339,7 +341,7 @@ transform-origin
 		<div class="content">
 			<div class="text_wrapper">
 				<img src="images/a8.png" alt="">
-				<div class="text">苏苏,你愿意让我每天陪着你吗</div>
+				<div class="text" id='text'>苏苏,你愿意让我每天陪着你吗</div>
 			</div>
 		</div>
 		<div class="btn-groups">
@@ -354,7 +356,7 @@ transform-origin
 		</div>
 	</div>
 	<div class="page_two hide">
-		<div class="type_words"></div>
+		<div class="type_words" style=" position:absolute;left:27%;width:40%;color:white;z-index:4;"></div>
 	</div>
 	
 	<div class="container" style="display:none;">
@@ -368,31 +370,44 @@ transform-origin
 
 </body>
 <script>
-window.onbeforeunload = function(event) { 
-
-	return confirm("确定退出吗"); 
-
-	}
+setInterval(function(){
+	var ll=["green","red","yellow"]
+	 var random1 = getRandom(0, 255);
+	 var random2 = getRandom(0, 255);
+	 var random3 = getRandom(0, 255);
+	
+	$("#text").css({'color':'rgb('+random1+','+random2+','+random3+')'})
+	//$(".type_words").css({'color':'rgb('+random1+','+random2+','+random3+')'})
+	// $("#text").animate({'color':'rgb('+random1+','+random2+','+random3+')'});
+},500)
 //thc
-var list=['你是一只可爱的小脑斧'];
+var list=['你是一只可爱的小脑斧','我愿做你可爱的小狗狗','开心时陪你笑陪你闹','不开心时可以给你一个依靠','我都不奢求一个抱抱','只求能每天和你聊聊','就这样淡淡的就好'];
 var i=0;
 $('#confirm').click(function(){
 	$('#p').html(list[i]);
 	i++;
 	if(i==list.length+1){
 		i=0;
+		list=[];
 		$('.container').hide();
-		$('#p').html('苏苏小姐姐');
+		$('#p').html('请小姐姐点愿意，不然哭了喔');
 	}
 })
-
+        function getRandom(min, max){
+            var r = Math.random() * (max - min);
+            var re = Math.round(r + min);
+            re = Math.max(Math.min(re, max), min)
+             
+            return re;
+        }
 </script>
 <script>
-(function () {
+ccc()
+function  ccc() {
     var COUNT = 300;
     var masthead = document.querySelector('.masthead');
-    var canvas = document.createElement('canvas');
-    var ctx = canvas.getContext('2d');
+    var canvas1 = document.createElement('canvas');
+    var ctx = canvas1.getContext('2d');
     var width = masthead.clientWidth;
     var height = masthead.clientHeight;
     var i = 0;
@@ -400,8 +415,8 @@ $('#confirm').click(function(){
     function onResize() {
         width = masthead.clientWidth;
         height = masthead.clientHeight;
-        canvas.width = width;
-        canvas.height = height;
+        canvas1.width = width;
+        canvas1.height = height;
         ctx.fillStyle = '#FFF';
         var wasActive = active;
         active = width > 600;
@@ -424,9 +439,9 @@ $('#confirm').click(function(){
         this.r = 1 + Math.random() * 2;
         this.o = 0.5 + Math.random() * 0.5;
     };
-    canvas.style.position = 'absolute';
-    canvas.style.left = canvas.style.top = '0';
-    canvas.style.zIndex = '-1';
+    canvas1.style.position = 'absolute';
+    canvas1.style.left = canvas1.style.top = '0';
+    canvas1.style.zIndex = '-1';
     var snowflakes = [], snowflake;
     for (i = 0; i < COUNT; i++) {
         snowflake = new Snowflake();
@@ -462,7 +477,7 @@ $('#confirm').click(function(){
     })();
     onResize();
     window.addEventListener('resize', onResize, false);
-    masthead.appendChild(canvas);
-})();
+    masthead.appendChild(canvas1);
+}
 </script>
 </html>
