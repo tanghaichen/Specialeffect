@@ -27,6 +27,9 @@ body {
 	background: #f0f0f0;
 	color: #000;
 }
+.masthead{
+background:#333;
+}
 
 .share_img {
 	width: 0;
@@ -275,55 +278,17 @@ transform-origin
 				$('.page_two').removeClass('hide');
 				typeWrite();
 				fireworks();
+				$('.container').hide();
 
 			});
+		$("body").eq(0).removeClass("masthead"); 
 		});
-		$('#no').click(function(event) {
-			modal('明人不说暗话！', A);
-		});
+	$('#no').click(function(event) {
+		$(".container").eq(0).show();
 	});
-
-	function A() {
-		modal('我喜欢你！', B);
-	}
-
-	function B() {
-		modal('我知道你在等我这一句话', C);
-	}
-
-	function C() {
-		modal('请您不要拒绝我', D);
-	}
-
-	function D() {
-		modal('拒绝我，不存在的', E);
-	}
-
-	function E() {
-		modal('这辈子都不可能让你离开我', F);
-	}
-
-	function F() {
-		modal('跟我走吧', G);
-	}
-
-	function G() {
-		modal('房产证上写你名', H);
-	}
-
-	function H() {
-		modal('我会做饭', I);
-	}
-
-	function I() {
-		modal('我会做家务', J)
-	}
-
-	function J() {
-		modal('答应我吧', function() {
-			//		fireworks();
-		});
-	}
+	
+	
+	});
 
 	function fireworks() {
 		$('.page_one').addClass('hide');
@@ -343,15 +308,14 @@ transform-origin
 				+ '<p>'
 				+ content
 				+ '</p>'
-				+ '<button type="button" id="confirm" class="confirm">确定</button>'
+				+ '<button type="button" id="confirms" class="confirm">确定</button>'
 				+ '</div>' + '</div>';
 		$('body').append(tpl);
 		$(document).on('click', '.confirm', function() {
-			$('.container').remove();
 			callback();
+
 		});
 	}
-
 	var myWords = '有人说，人的一生会遇到2920万人，而两个人相爱的概率只有0.000049。在这茫茫人海中，两个人能相遇就值得感激，能相爱更是一种难得。所以，我很庆幸上天让我遇见了你。我希望有个如你一般的人，能看完我写过的所有状态，读完我所有的日志，看完我从小到大的照片，试着听我喜欢的歌。如果可以，甚至陪我去我喜欢的地方，只想弥补错过你的青春。';
 	var x = 0;
 	var speed = 150;
@@ -365,17 +329,17 @@ transform-origin
 		}
 	}
 </script>
-<body>
+<body class="masthead">
 
 	<div class="share_img">
-		<img src="images/a8b.png" alt="">
+		<img src="images/a8.png" alt="">
 	</div>
 
 	<div class="page_one">
 		<div class="content">
 			<div class="text_wrapper">
 				<img src="images/a8.png" alt="">
-				<div class="text">我观察你好久了，你愿意做我女朋友吗？</div>
+				<div class="text">苏苏,你愿意让我每天陪着你吗</div>
 			</div>
 		</div>
 		<div class="btn-groups">
@@ -392,6 +356,113 @@ transform-origin
 	<div class="page_two hide">
 		<div class="type_words"></div>
 	</div>
+	
+	<div class="container" style="display:none;">
+		<div class="mask"></div>
+		<div class="modal">
+		<p id="p">苏苏小姐姐</p>
+		<button type="button" id="confirm" class="confirm">确定</button>
+	</div></div>
+
+	
 
 </body>
+<script>
+window.onbeforeunload = function(event) { 
+
+	return confirm("确定退出吗"); 
+
+	}
+//thc
+var list=['你是一只可爱的小脑斧'];
+var i=0;
+$('#confirm').click(function(){
+	$('#p').html(list[i]);
+	i++;
+	if(i==list.length+1){
+		i=0;
+		$('.container').hide();
+		$('#p').html('苏苏小姐姐');
+	}
+})
+
+</script>
+<script>
+(function () {
+    var COUNT = 300;
+    var masthead = document.querySelector('.masthead');
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    var width = masthead.clientWidth;
+    var height = masthead.clientHeight;
+    var i = 0;
+    var active = false;
+    function onResize() {
+        width = masthead.clientWidth;
+        height = masthead.clientHeight;
+        canvas.width = width;
+        canvas.height = height;
+        ctx.fillStyle = '#FFF';
+        var wasActive = active;
+        active = width > 600;
+        if (!wasActive && active)
+            requestAnimFrame(update);
+    }
+    var Snowflake = function () {
+        this.x = 0;
+        this.y = 0;
+        this.vy = 0;
+        this.vx = 0;
+        this.r = 0;
+        this.reset();
+    };
+    Snowflake.prototype.reset = function() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * -height;
+        this.vy = 1 + Math.random() * 3;
+        this.vx = 0.5 - Math.random();
+        this.r = 1 + Math.random() * 2;
+        this.o = 0.5 + Math.random() * 0.5;
+    };
+    canvas.style.position = 'absolute';
+    canvas.style.left = canvas.style.top = '0';
+    canvas.style.zIndex = '-1';
+    var snowflakes = [], snowflake;
+    for (i = 0; i < COUNT; i++) {
+        snowflake = new Snowflake();
+        snowflakes.push(snowflake);
+    }
+    function update() {
+        ctx.clearRect(0, 0, width, height);
+        if (!active)
+            return;
+        for (i = 0; i < COUNT; i++) {
+            snowflake = snowflakes[i];
+            snowflake.y += snowflake.vy;
+            snowflake.x += snowflake.vx;
+            ctx.globalAlpha = snowflake.o;
+            ctx.beginPath();
+            ctx.arc(snowflake.x, snowflake.y, snowflake.r, 0, Math.PI * 2, false);
+            ctx.closePath();
+            ctx.fill();
+            if (snowflake.y > height) {
+                snowflake.reset();
+            }
+        }
+        requestAnimFrame(update);
+    }
+    // shim layer with setTimeout fallback
+    window.requestAnimFrame = (function(){
+        return  window.requestAnimationFrame       ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame    ||
+                function( callback ){
+                    window.setTimeout(callback, 1000 / 60);
+                };
+    })();
+    onResize();
+    window.addEventListener('resize', onResize, false);
+    masthead.appendChild(canvas);
+})();
+</script>
 </html>
